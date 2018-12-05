@@ -15,16 +15,16 @@
 </style>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'JobList',
-  data () {
-    return {
-      jobs: []
-    }
-  },
+  computed: mapGetters({
+    jobs: 'example/jobs'
+  }),
   created () {
     this.$store.state.$db.collection('jobs').orderBy('from').onSnapshot(
-      (next) => console.log(next),
+      (next) => this.$store.dispatch('example/addJobSnapshot', next),
       (error) => console.log(error)
     )
   }
