@@ -1,3 +1,3 @@
 export function addJobSnapshot ({commit}, snapshot) {
-  commit('addJob', snapshot)
+  snapshot.forEach(doc => commit('addJob', doc.data()))
 }
