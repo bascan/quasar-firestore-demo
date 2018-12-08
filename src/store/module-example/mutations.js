@@ -1,3 +1,6 @@
-export function addJob (state, job) {
-  state.jobs.push(job)
+export function refreshJobs (state, newJobs) {
+  state.jobs.length = 0
+  newJobs.forEach(
+    (newJob) => state.jobs.push(newJob)
+  )
 }

@@ -1,13 +1,11 @@
 <template>
   <q-page class="flex flex-center">
-    <q-list>
-      <q-list-header>
-        Jobs
-      </q-list-header>
-      <q-item v-for="(job, idx) in jobs" :key="idx">
-        <q-item-main :label="job.title"/>
-      </q-item>
-    </q-list>
+    <q-table
+      title="Jobs"
+      :data="tableData"
+      :columns="columns"
+      row-key="name"
+    />
   </q-page>
 </template>
 
@@ -19,8 +17,52 @@ import {mapGetters} from 'vuex'
 
 export default {
   name: 'JobList',
+  data: () => ({
+    columns: [
+      {
+        name: 'ref',
+        required: true,
+        label: 'Reference',
+        align: 'left',
+        field: 'reference',
+        sortable: true
+      },
+      {
+        name: 'title',
+        required: true,
+        label: 'Title',
+        align: 'left',
+        field: 'title',
+        sortable: true
+      },
+      {
+        name: 'desc',
+        required: true,
+        label: 'Description',
+        align: 'left',
+        field: 'description',
+        sortable: true
+      },
+      {
+        name: 'from',
+        required: true,
+        label: 'From',
+        align: 'left',
+        field: 'from',
+        sortable: true
+      },
+      {
+        name: 'to',
+        required: true,
+        label: 'To',
+        align: 'left',
+        field: 'to',
+        sortable: true
+      }
+    ]
+  }),
   computed: mapGetters({
-    jobs: 'example/jobs'
+    tableData: 'example/jobs'
   }),
   created () {
     this.$store.state.$db.collection('jobs').orderBy('from').onSnapshot(
