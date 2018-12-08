@@ -48,7 +48,7 @@ export default {
         required: true,
         label: 'From',
         align: 'left',
-        field: 'from',
+        field: 'fromFormatted',
         sortable: true
       },
       {
@@ -56,7 +56,7 @@ export default {
         required: true,
         label: 'To',
         align: 'left',
-        field: 'to',
+        field: 'toFormatted',
         sortable: true
       }
     ]
