@@ -37,6 +37,10 @@
           <q-item-side icon="view_list" />
           <q-item-main label="Jobs" />
         </q-item>
+        <q-item to="/new">
+          <q-item-side icon="add" />
+          <q-item-main label="Add Job" />
+        </q-item>
       </q-list>
     </q-layout-drawer>
 
