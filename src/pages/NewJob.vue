@@ -47,7 +47,14 @@ export default {
   },
   methods: {
     submit () {
-      console.log(this.reference + ', ' + this.title + ', ' + this.description + ', ' + this.from + ', ' + this.to)
+      console.log('Adding job: ' + this.reference + ', ' + this.title + ', ' + this.description + ', ' + this.from + ', ' + this.to)
+      this.$store.state.$db.collection('jobs').add({
+        reference: this.reference,
+        title: this.title,
+        description: this.description,
+        from: this.from,
+        to: this.to
+      })
     }
   }
 }
