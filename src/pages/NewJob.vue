@@ -34,6 +34,9 @@
   </style>
 
 <script>
+import firebase from 'firebase'
+import 'firebase/firestore'
+
 export default {
   name: 'NewJob',
   data: () => {
@@ -47,13 +50,17 @@ export default {
   },
   methods: {
     submit () {
-      console.log('Adding job: ' + this.reference + ', ' + this.title + ', ' + this.description + ', ' + this.from + ', ' + this.to)
+      const moment = require('moment')
+      const fromUnix = moment(this.from).format('X')
+      const toUnix = moment(this.to).format('X')
+
+      console.log('Adding job: ' + this.reference + ', ' + this.title + ', ' + this.description + ', ' + fromUnix + ', ' + toUnix)
       this.$store.state.$db.collection('jobs').add({
         reference: this.reference,
         title: this.title,
         description: this.description,
-        from: this.from,
-        to: this.to
+        from: new firebase.firestore.Timestamp(fromUnix),
+        to: new firebase.firestore.Timestamp(toUnix)
       })
     }
   }
