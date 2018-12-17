@@ -1,5 +1,5 @@
 export function addJobSnapshot ({commit}, snapshot) {
   const newJobs = []
-  snapshot.forEach(doc => newJobs.push(doc.data()))
+  snapshot.forEach(doc => newJobs.push(doc))
   commit('refreshJobs', newJobs)
 }
