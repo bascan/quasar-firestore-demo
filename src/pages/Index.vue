@@ -4,7 +4,9 @@
       title="Jobs"
       :data="tableData"
       :columns="columns"
-      row-key="name"
+      row-key="reference"
+      selection="single"
+      :selected.sync="selected"
     />
   </q-page>
 </template>
@@ -18,6 +20,7 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'JobList',
   data: () => ({
+    selected: [],
     columns: [
       {
         name: 'ref',
