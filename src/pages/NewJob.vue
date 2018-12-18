@@ -6,7 +6,7 @@
         </q-card-title>
         <q-card-separator />
         <q-card-main>
-          <q-field label='Reference' :count='5' :error="$v.form.reference.$error">
+          <q-field label='Reference' :count='6' :error="$v.form.reference.$error">
             <q-input v-model='form.reference' />
           </q-field>
           <q-field label='Title' :count='25' :error="$v.form.title.$error">
@@ -82,6 +82,7 @@ export default {
         from: new firebase.firestore.Timestamp(fromUnix),
         to: new firebase.firestore.Timestamp(toUnix)
       })
+      this.$router.push('/')
     }
   }
 }
