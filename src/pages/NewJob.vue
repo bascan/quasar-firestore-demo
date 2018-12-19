@@ -1,11 +1,10 @@
   <template>
     <q-page class='flex flex-center'>
       <q-card>
-        <q-card-title>
-          Add Job
-        </q-card-title>
+        <q-card-title>Add Job</q-card-title>
         <q-card-separator />
         <q-card-main>
+          <strong class="warning">{{globalError}}</strong>
           <q-field label='Reference' :count='6' :error="$v.form.reference.$error">
             <q-input v-model='form.reference' />
           </q-field>
@@ -42,6 +41,7 @@ export default {
   name: 'NewJob',
   data: () => {
     return {
+      globalError: '',
       form: {
         reference: '',
         title: '',
@@ -60,6 +60,12 @@ export default {
       to: {required}
     }
   },
+  created () {
+    this.$store.state.$db.collection('jobs').orderBy('from').onSnapshot(
+      (next) => this.$store.dispatch('example/addJobSnapshot', next),
+      (error) => console.log(error)
+    )
+  },
   methods: {
     submit () {
       this.$v.form.$touch()
@@ -67,6 +73,12 @@ export default {
       if (this.$v.form.$error) {
         this.$q.notify('Please review your input.')
         console.log('Form validation failed.')
+        return
+      }
+
+      const referenceFound = this.$store.state.example.jobs.find((job) => job.reference === this.form.reference)
+      if (referenceFound) {
+        this.globalError = 'Reference must be unique.'
         return
       }
 
